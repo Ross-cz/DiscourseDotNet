@@ -17,6 +17,11 @@ before_build:
   - nuget restore
 
 notifications:
+  - provider: Webhook
+    url: https://webhooks.gitter.im/e/5a8fde1159949d02fd6a
+    on_build_success: true
+    on_build_failure: true
+
   - provider: Slack
     auth_token:
       secure: 227YFxW9dAVa2Rc5N2GImoG/P4gWT6ep2e8NGphkknPf5h08JkUl62XpB/4JKtPX

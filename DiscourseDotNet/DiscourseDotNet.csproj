@@ -28,6 +28,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\DiscourseDotNet.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -43,6 +44,10 @@
   <ItemGroup>
     <Compile Include="DiscourseApi.cs" />
     <Compile Include="DiscourseApiStatic.cs" />
+    <Compile Include="Request\UpdateCategory.cs" />
+    <Compile Include="Request\UpdateTopic.cs" />
+    <Compile Include="Request\UpdateUserTrustLevel.cs" />
+    <Compile Include="Request\UpdateUsername.cs" />
     <Compile Include="Extensions\User.cs" />
     <Compile Include="Extensions\Categories.cs" />
     <Compile Include="Extensions\Default.cs" />
@@ -53,6 +58,7 @@
     <Compile Include="DiscourseException.cs" />
     <Compile Include="Request\NewCategory.cs" />
     <Compile Include="Request\NewTopic.cs" />
+    <Compile Include="Request\NewUser.cs" />
     <Compile Include="Request\UpdateEmail.cs" />
     <Compile Include="Response\Get\GetCategoriesModel.cs" />
     <Compile Include="Response\Get\GetUserModel.cs" />

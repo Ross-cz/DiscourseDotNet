@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Net;
+using DiscourseDotNet.Lib;
 using DiscourseDotNet.Request;
 using DiscourseDotNet.Response;
 using DiscourseDotNet.Response.Get;
@@ -21,7 +23,7 @@ namespace DiscourseDotNet.Extensions
             return response == null ? null : response.Category;
         }
 
-        public static GetTopicsModel GetCategoryTopics(this DiscourseApi api, int categoryId, string username = DefaultUsername)
+        public static GetTopicsModel GetCategoryTopics(this DiscourseApi api, int categoryId)
         {
             var route = String.Format("/c/{0}.json", categoryId);
             return api.ExecuteRequest<GetTopicsModel>(route, Method.GET, true);
@@ -45,5 +47,24 @@ namespace DiscourseDotNet.Extensions
             var route = String.Format("/c/{0}/{1}.json", parentCategory, childCategory);
             return api.ExecuteRequest<GetTopicsModel>(route, Method.GET);
         }
+
+        public static ResultState UpdateCategory(this DiscourseApi api, int categoryId, string newName, int? parentCategory, string username = DefaultUsername)
+        {
+            var route = String.Format("/c/{0}", categoryId);
+	        var data = new UpdateCategory(categoryId, newName, parentCategory);
+
+            var result = api.ExecuteRequest<RestResponse>(route, Method.PUT, true, username, null, data);
+
+			switch (result.StatusCode)
+			{
+				case (HttpStatusCode) 422:
+					return ResultState.Unchanged;
+				case HttpStatusCode.Accepted:
+					return ResultState.Modified;
+				default:
+					return ResultState.Error;
+					}
+				
+				}
     }
 }

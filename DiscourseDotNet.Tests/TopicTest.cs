@@ -82,7 +82,7 @@ namespace DiscourseDotNet.Tests
                 Title = "Testing Topic: " + Guid.NewGuid(),
                 CategoryID = 21
             };
-            var response = _api.PostTopic(newTopic);
+            var response = _api.CreateTopic(newTopic);
 
             Assert.IsNotNull(response);
             Assert.IsTrue(response.Success);

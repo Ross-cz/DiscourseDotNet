@@ -65,5 +65,23 @@ namespace DiscourseDotNet.Extensions
 					return ResultState.Error;
 			}
 		}
+
+				public static ResultState DeleteTopic(this DiscourseApi api, int topicId, string username = DefaultUsername)
+				{
+            var route = String.Format("/t/{0}", topicId);
+	        var data = new DeleteTopic(topicId);
+
+            var result = api.ExecuteRequest<RestResponse>(route, Method.DELETE, true, username, null, data);
+
+			switch (result.StatusCode)
+			{
+				case (HttpStatusCode) 422:
+					return ResultState.Unchanged;
+				case HttpStatusCode.Accepted:
+					return ResultState.Modified;
+				default:
+					return ResultState.Error;
+					}
+				}
 	}
 }

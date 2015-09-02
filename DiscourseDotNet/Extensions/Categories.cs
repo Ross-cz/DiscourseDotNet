@@ -66,5 +66,23 @@ namespace DiscourseDotNet.Extensions
 					}
 				
 				}
+
+				public static ResultState DeleteCategory(this DiscourseApi api, int categoryId, string username = DefaultUsername)
+				{
+            var route = String.Format("/c/{0}", categoryId);
+	        var data = new DeleteCategory(categoryId);
+
+            var result = api.ExecuteRequest<RestResponse>(route, Method.DELETE, true, username, null, data);
+
+			switch (result.StatusCode)
+			{
+				case (HttpStatusCode) 422:
+					return ResultState.Unchanged;
+				case HttpStatusCode.Accepted:
+					return ResultState.Modified;
+				default:
+					return ResultState.Error;
+					}
+				}
     }
 }

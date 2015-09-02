@@ -15,7 +15,7 @@ namespace DiscourseDotNet.Tests
         [TestInitialize]
         public void Initialize()
         {
-            _api = DiscourseApi.GetInstance("http://discourse.logicpending.com", _apiKey);
+            _api = DiscourseApi.GetInstance(Environment.GetEnvironmentVariable("DiscourseApiUrl"), _apiKey);
         }
 
         [TestMethod, TestCategory("Online")]

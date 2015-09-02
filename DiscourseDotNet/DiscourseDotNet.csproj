@@ -44,6 +44,8 @@
   <ItemGroup>
     <Compile Include="DiscourseApi.cs" />
     <Compile Include="DiscourseApiStatic.cs" />
+    <Compile Include="Request\DeleteCategory.cs" />
+    <Compile Include="Request\DeleteTopic.cs" />
     <Compile Include="Request\UpdateCategory.cs" />
     <Compile Include="Request\UpdateTopic.cs" />
     <Compile Include="Request\UpdateUserTrustLevel.cs" />

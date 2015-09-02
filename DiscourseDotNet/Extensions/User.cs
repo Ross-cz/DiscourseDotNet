@@ -93,5 +93,23 @@ namespace DiscourseDotNet.Extensions
 					return ResultState.Error;
 			}
 		}
+
+		public static ResultState DeleteUser(this DiscourseApi api, string username, string apiUserName = DefaultUsername)
+		{
+			var path = String.Format("/users/{0}.json", username);
+			var data = new UpdateUsername(username);
+
+			var result = api.ExecuteRequest<RestResponse>(path, Method.DELETE, true, apiUserName, null, data);
+
+			switch (result.StatusCode)
+			{
+				case (HttpStatusCode) 422:
+					return ResultState.Unchanged;
+				case HttpStatusCode.Accepted:
+					return ResultState.Modified;
+				default:
+					return ResultState.Error;
+			}
+		}
 	}
 }

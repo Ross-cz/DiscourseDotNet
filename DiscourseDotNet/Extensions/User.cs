@@ -24,7 +24,7 @@ namespace DiscourseDotNet.Extensions
 			{
 				case (HttpStatusCode) 422:
 					return ResultState.Unchanged;
-				case HttpStatusCode.Accepted:
+				case HttpStatusCode.OK:
 					return ResultState.Created;
 				default:
 					return ResultState.Error;
@@ -49,7 +49,7 @@ namespace DiscourseDotNet.Extensions
 			{
 				case (HttpStatusCode) 422:
 					return ResultState.Unchanged;
-				case HttpStatusCode.Accepted:
+				case HttpStatusCode.OK:
 					return ResultState.Modified;
 				default:
 					return ResultState.Error;
@@ -68,7 +68,7 @@ namespace DiscourseDotNet.Extensions
 			{
 				case (HttpStatusCode) 422:
 					return ResultState.Unchanged;
-				case HttpStatusCode.Accepted:
+				case HttpStatusCode.OK:
 					return ResultState.Modified;
 				default:
 					return ResultState.Error;
@@ -87,7 +87,7 @@ namespace DiscourseDotNet.Extensions
 			{
 				case (HttpStatusCode) 422:
 					return ResultState.Unchanged;
-				case HttpStatusCode.Accepted:
+				case HttpStatusCode.OK:
 					return ResultState.Modified;
 				default:
 					return ResultState.Error;
@@ -105,8 +105,8 @@ namespace DiscourseDotNet.Extensions
 			{
 				case (HttpStatusCode) 422:
 					return ResultState.Unchanged;
-				case HttpStatusCode.Accepted:
-					return ResultState.Modified;
+				case HttpStatusCode.OK:
+					return ResultState.Deleted;
 				default:
 					return ResultState.Error;
 			}

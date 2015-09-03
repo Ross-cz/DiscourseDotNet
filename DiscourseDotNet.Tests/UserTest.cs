@@ -14,13 +14,12 @@ namespace DiscourseDotNet.Tests
         [TestInitialize]
         public void Initialize()
         {
-            _api = DiscourseApi.GetInstance("http://discourse.logicpending.com", _apiKey);
+			_api = DiscourseApi.GetInstance(Environment.GetEnvironmentVariable("DiscourseApiUrl"), _apiKey);
         }
 
         [TestMethod]
         public void TestGetUser()
         {
-            _api = DiscourseApi.GetInstance("https://meta.discourse.org", _apiKey);
             var result = _api.GetUser("chaoticloki");
             Assert.IsNotNull(result);
         }
@@ -31,5 +30,45 @@ namespace DiscourseDotNet.Tests
             var result = _api.UpdateUserEmail("cliffordduke", "cliffordduke@gmail.com");
             Assert.IsTrue(result == ResultState.Unchanged, String.Format("Actual result: {0}", result));
         }
-    }
+
+	    [TestMethod, TestCategory("Online")]
+	    public void CreateNewUser()
+	    {
+		    var res = _api.CreateUser("Test User", "testUser", "radim.janda@visualunity.com", "qwertyuiop");
+			Assert.IsNotNull(res);
+		    Assert.AreEqual(ResultState.Created, res);
+	    }
+
+	    [TestMethod, TestCategory("Online")]
+	    public void UpdateUserName()
+	    {
+			var res = _api.UpdateUsername("newTestUser", "testUser");
+			Assert.IsNotNull(res);
+			Assert.AreEqual(ResultState.Modified, res);
+		}
+
+		[TestMethod, TestCategory("Online")]
+		public void UpdateUserEmail()
+		{
+			var res = _api.UpdateUserEmail("testUser","rdm@post.cz");
+			Assert.IsNotNull(res);
+			Assert.AreEqual(ResultState.Modified, res);
+		}
+
+		[TestMethod, TestCategory("Online")]
+		public void UpdateUserTrustLevel()
+		{
+			var res = _api.UpdateUserTrustLevel(18, 2);
+			Assert.IsNotNull(res);
+			Assert.AreEqual(ResultState.Modified, res);
+		}
+
+		[TestMethod, TestCategory("Online")]
+		public void DeleteUser()
+		{
+			var res = _api.DeleteUser("testUser");
+			Assert.IsNotNull(res);
+			Assert.AreEqual(ResultState.Deleted, res);
+		}
+	}
 }
